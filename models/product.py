@@ -1,2 +1,5 @@
-class Product():
-    name: bool
+from pydantic import BaseModel
+
+
+class Product(BaseModel):
+    name: str
