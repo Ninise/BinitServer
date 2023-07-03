@@ -10,12 +10,12 @@ router = APIRouter()
 
 # get all products +
 # add a product +
-# edit a product
-# search product
-# remove a product
+# edit a product +
+# search product +
+# remove a product +
 #
-# suggest a product
-# remove a suggested product
+# suggest a product +
+# remove a suggested product +
 #
 # game questions
 #
@@ -27,7 +27,7 @@ router = APIRouter()
 # feedbacks
 
 
-@router.get("/products", status_code=200)
+@router.get("/products/all", status_code=200)
 def fetch_all_products() -> Response:
     """
     Fetch all products
@@ -44,3 +44,31 @@ def add_product(product: Product) -> Response:
     # add record to db
 
     return Response(status=True, code=200, data=product)
+
+
+@router.put("/products", status_code=200)
+def update_product(id: str, product: Product) -> Response:
+    """
+    Add a product
+    """
+    # add record to db
+
+    return Response(status=True, code=200, data=product)
+
+
+@router.get("/products", status_code=200)
+def search_products(query: str) -> Response:
+    """
+    search all products
+    """
+
+    return Response(status=True, code=200, data=["Prod1", "Prod2"])
+
+
+@router.delete("/products", status_code=200)
+def remove_product(id: str) -> Response:
+    """
+    search all products
+    """
+
+    return Response(status=True, code=200)

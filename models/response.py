@@ -12,4 +12,10 @@ class Response(BaseModel):
         # Exclude 'error' field from the response if it is None
         if self.error is None:
             kwargs['exclude'] = {'error'}
+
+        if self.data is None:
+            kwargs['exclude'] = {'data'}
+            if self.error is None:
+                kwargs['exclude'] = {'data', 'error'}
+
         return super().dict(*args, **kwargs)
