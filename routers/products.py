@@ -49,7 +49,7 @@ def add_product(product: Product) -> Response:
 @router.put("/products", status_code=200)
 def update_product(id: str, product: Product) -> Response:
     """
-    Add a product
+    Update a product
     """
     # add record to db
 
