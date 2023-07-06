@@ -4,19 +4,16 @@ from pydantic import BaseModel
 
 
 # Shared properties
-class SuggestedBase(BaseModel):
+class LocationBase(BaseModel):
     name: str
-    type: str
-    description: Optional[str] = None
-    location: Optional[str] = None
 
 # Properties to receive on item creation
 
 
-class SuggestedCreate(SuggestedBase):
+class LocationCreate(LocationBase):
     pass
 
 
 # Properties to receive on item update
-class SuggestedUpdate(SuggestedBase):
+class LocationUpdate(LocationBase):
     pass
