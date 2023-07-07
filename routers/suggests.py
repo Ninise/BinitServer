@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Optional
 
-from models.suggested import Suggested
+from schemas.suggested import SuggestedCreate
 from models.response import Response
 
 router = APIRouter()
@@ -17,7 +17,7 @@ def fetch_all_suggested() -> Response:
 
 
 @router.post("/suggested", status_code=200)
-def add_suggested(suggested: Suggested) -> Response:
+def add_suggested(suggested: SuggestedCreate) -> Response:
     """
     Add suggested
     """

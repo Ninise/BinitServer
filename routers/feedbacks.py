@@ -3,6 +3,13 @@ from typing import Any, Optional
 
 from models.feedback import Feedback
 from models.response import Response
+from utils.deps import deps
+
+from sqlalchemy.orm import Session
+
+import crud
+
+from schemas.feedback import FeedbackCreate
 
 router = APIRouter()
 
@@ -17,10 +24,12 @@ def fetch_all_feedbacks() -> Response:
 
 
 @router.post("/feedbacks", status_code=200)
-def add_suggested(feedback: Feedback) -> Response:
+def add_suggested(*, db: Session = Depends(deps.get_db), feedback_in: FeedbackCreate) -> Response:
     """
     Add feedback to db and send in email
     """
+
+    feedback = crud.feedback.create(db, obj_in=feedback_in)
 
     return Response(status=True, code=200, data=feedback)
 

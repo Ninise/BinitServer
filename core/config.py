@@ -9,8 +9,8 @@ class Settings(BaseSettings):
     SECRET_KEY: str = secrets.token_urlsafe(32)
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
-    SERVER_NAME: str
-    SERVER_HOST: AnyHttpUrl
+    SERVER_NAME: str = "Binit!_v1"
+    SERVER_HOST: AnyHttpUrl = "http://localhost"
     # BACKEND_CORS_ORIGINS is a JSON-formatted list of origins
     # e.g: '["http://localhost", "http://localhost:4200", "http://localhost:3000", \
     # "http://localhost:8080", "http://local.dockertoolbox.tiangolo.com"]'
@@ -24,14 +24,14 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
 
-    PROJECT_NAME: str
-    SENTRY_DSN: Optional[HttpUrl] = None
+    PROJECT_NAME: str = "Binit!"
+    # SENTRY_DSN: Optional[HttpUrl] = None
 
-    @validator("SENTRY_DSN", pre=True)
-    def sentry_dsn_can_be_blank(cls, v: str) -> Optional[str]:
-        if len(v) == 0:
-            return None
-        return v
+    # @validator("SENTRY_DSN", pre=True)
+    # def sentry_dsn_can_be_blank(cls, v: str) -> Optional[str]:
+    #     if len(v) == 0:
+    #         return None
+    #     return v
 
     POSTGRES_SERVER: str
     POSTGRES_USER: str

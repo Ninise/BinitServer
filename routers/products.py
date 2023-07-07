@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Optional
 
-from models.product import Product
+from schemas.product import ProductCreate
 from models.response import Response
 
 from utils.utils import response
@@ -37,7 +37,7 @@ def fetch_all_products() -> Response:
 
 
 @router.post("/products", status_code=200)
-def add_product(product: Product) -> Response:
+def add_product(product: ProductCreate) -> Any:
     """
     Add a product
     """
@@ -47,7 +47,7 @@ def add_product(product: Product) -> Response:
 
 
 @router.put("/products", status_code=200)
-def update_product(id: str, product: Product) -> Response:
+def update_product(id: str, product: ProductCreate) -> Response:
     """
     Update a product
     """
