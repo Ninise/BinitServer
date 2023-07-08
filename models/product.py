@@ -11,12 +11,14 @@ if TYPE_CHECKING:
 product_location_association = Table(
     'product_location_association',
     Base.metadata,
-    Column('product_id', Integer, ForeignKey('product.id')),
-    Column('location_id', Integer, ForeignKey('location.id'))
+    Column('product_id', Integer, ForeignKey('products.id')),
+    Column('location_id', Integer, ForeignKey('locations.id'))
 )
 
 
 class Product(Base):
+    __tablename__ = 'products'
+
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     type = Column(String, index=True)

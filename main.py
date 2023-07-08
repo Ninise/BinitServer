@@ -2,13 +2,9 @@ from pathlib import Path
 
 from fastapi import FastAPI, APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
-# from sqlalchemy.orm import Session
 import unicorn
 
-# from app import crud
-# from app.api import deps
 from routers.api import api_router
-# from app.core.config import settings
 
 root_router = APIRouter()
 app = FastAPI(title="Binit API")

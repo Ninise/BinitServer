@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 from models.feedback import Feedback
 from models.response import Response
-from utils.deps import deps
+from utils import deps
 
 from sqlalchemy.orm import Session
 

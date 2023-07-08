@@ -11,6 +11,8 @@ if TYPE_CHECKING:
 
 
 class Location(Base):
+    __tablename__ = 'locations'
+
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     products = relationship(

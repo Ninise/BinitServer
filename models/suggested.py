@@ -10,6 +10,8 @@ if TYPE_CHECKING:
 
 
 class Suggested(Base):
+    __tablename__ = 'suggested'
+
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     type = Column(String, index=True)
