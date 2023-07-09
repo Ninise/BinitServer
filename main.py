@@ -4,7 +4,7 @@ from fastapi import FastAPI, APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
 import unicorn
 
-from routers.api import api_router
+from app.routers.api import api_router
 
 root_router = APIRouter()
 app = FastAPI(title="Binit API")
