@@ -10,6 +10,10 @@ from schemas.product import ProductCreate, ProductUpdate
 
 
 class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
+
+    def get_all(self, db: Session) -> Optional[Product]:
+        return db.query(Product).all()
+
     def get_by_type(self, db: Session, *, type: str) -> Optional[Product]:
         return db.query(Product).filter(Product.type == type).all()
 

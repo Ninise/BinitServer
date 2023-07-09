@@ -4,31 +4,46 @@ from typing import Any, Optional
 from schemas.suggested import SuggestedCreate
 from models.response import Response
 
+import crud
+
+from utils import deps
+
+from sqlalchemy.orm import Session
+
 router = APIRouter()
 
 
-@router.get("/suggested/all", status_code=200)
-def fetch_all_suggested() -> Response:
+@router.get("/suggested", status_code=200)
+def fetch_all_suggested(*, db: Session = Depends(deps.get_db)) -> Response:
     """
     Fetch all suggested
     """
 
-    return Response(status=True, code=200, data=["Suggested1", "Suggested2"])
+    suggested = crud.suggested.get_all(db=db)
+
+    return Response(status=True, code=200, data=suggested)
 
 
 @router.post("/suggested", status_code=200)
-def add_suggested(suggested: SuggestedCreate) -> Response:
+def add_suggested(*, db: Session = Depends(deps.get_db), suggested_in: SuggestedCreate) -> Response:
     """
     Add suggested
     """
+
+    suggested = crud.suggested.create(db=db, obj_in=suggested_in)
 
     return Response(status=True, code=200, data=suggested)
 
 
 @router.delete("/suggested", status_code=200)
-def remove_suggested(id: str) -> Response:
+def remove_suggested(*, db: Session = Depends(deps.get_db), id: str) -> Response:
     """
     Remove suggested
     """
 
-    return Response(status=True, code=200)
+    suggested = crud.suggested.get(db, id=id)
+    if suggested:
+        crud.suggested.delete(db, suggested_id=id)
+        return Response(status=True, code=200)
+    else:
+        return Response(status=False, code=400, error=f"Suggested product with id {id} doesn't exist")

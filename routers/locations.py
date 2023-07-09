@@ -41,6 +41,9 @@ def remove_location(*, db: Session = Depends(deps.get_db), id: int) -> Response:
     Remove location
     """
 
-    crud.location.delete(db=db, location_id=id)
-
-    return Response(status=True, code=200)
+    location = crud.location.get(db, id=id)
+    if location:
+        crud.location.delete(db, location_id=id)
+        return Response(status=True, code=200)
+    else:
+        return Response(status=False, code=400, error=f"Location with id {id} doesn't exist")
