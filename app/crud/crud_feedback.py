@@ -9,7 +9,7 @@ from app.schemas.feedback import FeedbackCreate, FeedbackUpdate
 
 class CRUDFeedback(CRUDBase[Feedback, FeedbackCreate, FeedbackUpdate]):
     def get_all(self, db: Session) -> Optional[Feedback]:
-        return db.query(Feedback).all()
+        return db.get(Feedback).all()
 
     def create(self, db: Session, *, obj_in: FeedbackCreate) -> Feedback:
 
@@ -24,7 +24,7 @@ class CRUDFeedback(CRUDBase[Feedback, FeedbackCreate, FeedbackUpdate]):
         return db_obj
 
     def delete(self, db: Session, *, feedback_id: int) -> None:
-        db_obj = db.query(Feedback).get(feedback_id)
+        db_obj = db.get(Feedback, ident=feedback_id)
         if db_obj:
             db.delete(db_obj)
             db.commit()

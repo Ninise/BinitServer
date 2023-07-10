@@ -19,4 +19,7 @@ class SuggestedCreate(SuggestedBase):
 
 # Properties to receive on item update
 class SuggestedUpdate(SuggestedBase):
-    pass
+    name: Optional[str] = None
+    type: Optional[str] = None
+    description: Optional[str] = None
+    location: Optional[str] = None

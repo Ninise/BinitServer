@@ -8,7 +8,7 @@ class ProductBase(BaseModel):
     name: str
     type: str
     description: str = None
-    locations: List[int]
+    locations: List[str]
 
 # Properties to receive on item creation
 

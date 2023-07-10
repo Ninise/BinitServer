@@ -11,7 +11,7 @@ from app.schemas.suggested import SuggestedCreate, SuggestedUpdate
 class CRUDSuggested(CRUDBase[Suggested, SuggestedCreate, SuggestedUpdate]):
 
     def get_all(self, db: Session) -> Optional[Suggested]:
-        return db.query(Suggested).all()
+        return db.get(Suggested).all()
 
     def create(self, db: Session, *, obj_in: SuggestedCreate) -> Suggested:
 
@@ -37,7 +37,7 @@ class CRUDSuggested(CRUDBase[Suggested, SuggestedCreate, SuggestedUpdate]):
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
     def delete(self, db: Session, *, suggested_id: int) -> None:
-        db_obj = db.query(Suggested).get(suggested_id)
+        db_obj = db.get(Suggested, ident=suggested_id)
         if db_obj:
             db.delete(db_obj)
             db.commit()
