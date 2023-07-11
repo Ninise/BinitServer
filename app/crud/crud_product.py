@@ -12,7 +12,7 @@ from app.schemas.product import ProductCreate, ProductUpdate
 class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
     def get_all(self, db: Session) -> Optional[Product]:
-        return db.query(Product).all()
+        return db.get(Product).all()
 
     def get_by_type(self, db: Session, *, type: str) -> Optional[Product]:
         return db.query(Product).filter(Product.type == type).all()
@@ -60,7 +60,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
     def delete(self, db: Session, *, product_id: int) -> None:
-        db_obj = db.query(Product).get(product_id)
+        db_obj = db.get(Product, ident=product_id)
         if db_obj:
             db.delete(db_obj)
             db.commit()

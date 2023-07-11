@@ -19,10 +19,17 @@ class CRUDLocation(CRUDBase[Location, LocationCreate, LocationUpdate]):
         db_obj = Location(
             name=obj_in.name
         )
-        db.add(db_obj)
-        db.commit()
-        db.refresh(db_obj)
-        return db_obj
+
+        location = db.query(Location).filter(
+            Location.name == obj_in.name).first()
+
+        if location is None:
+            db.add(db_obj)
+            db.commit()
+            db.refresh(db_obj)
+            return db_obj
+        else:
+            return location
 
     def update(
         self, db: Session, *, db_obj: Location, obj_in: Union[LocationUpdate, Dict[str, Any]]

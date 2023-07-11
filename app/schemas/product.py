@@ -19,4 +19,7 @@ class ProductCreate(ProductBase):
 
 # Properties to receive on item update
 class ProductUpdate(ProductBase):
-    pass
+    name: Optional[str] = None
+    type: Optional[str] = None
+    description: Optional[str] = None
+    locations: Optional[List[str]] = None

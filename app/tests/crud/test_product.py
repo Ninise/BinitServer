@@ -15,9 +15,11 @@ def test_create_product(db: Session) -> None:
     description = product_in.description
     type = product_in.type
 
+    print(f"FUCK: {location[0].name}")
+
     product = crud.product.create(db=db, obj_in=ProductCreate(
         name=name,
-        locations=location,
+        locations=[location[0].name],
         description=description,
         type=type
     ))
