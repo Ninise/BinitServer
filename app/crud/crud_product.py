@@ -17,6 +17,20 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def get_by_type(self, db: Session, *, type: str) -> Optional[Product]:
         return db.query(Product).filter(Product.type == type).all()
 
+    def get_products_by_location(self, db: Session, location_name: str):
+
+        location = db.query(Location).filter(
+            Location.name == location_name).first()
+
+        if location is None:
+            raise Exception(status_code=404,
+                            detail=f'Location with a name {location_name} is not found')
+
+        products = db.query(Product).join(Product.locations).filter(
+            Location.name == location_name).all()
+
+        return products
+
     def search(self, db: Session, query: str):
         search_query = f"%{query}%"
 
@@ -26,6 +40,24 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
                 Product.TYPE.ilike(search_query)
             )
         ).all()
+
+    def test_search_type(db):
+        # Define a test query
+        query = "ORG"
+
+        results = db.search(db=db, query=query)
+
+        assert isinstance(results, list)
+        assert all(isinstance(result, Product) for result in results)
+
+    def test_search_name(db):
+        # Define a test query
+        query = "Banana"
+
+        results = db.search(db=db, query=query)
+
+        assert isinstance(results, list)
+        assert all(isinstance(result, Product) for result in results)
 
     def create(self, db: Session, *, obj_in: ProductCreate) -> Product:
 

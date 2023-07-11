@@ -15,8 +15,6 @@ def test_create_product(db: Session) -> None:
     description = product_in.description
     type = product_in.type
 
-    print(f"FUCK: {location[0].name}")
-
     product = crud.product.create(db=db, obj_in=ProductCreate(
         name=name,
         locations=[location[0].name],
@@ -28,6 +26,32 @@ def test_create_product(db: Session) -> None:
     assert product.locations == location
     assert product.description == description
     assert product.type == type
+
+
+def test_get_products_by_location_name(db: Session) -> None:
+    location_name = "Burlington"
+
+    create_random_product(db=db)
+    create_random_product(db=db)
+    create_random_product(db=db)
+
+    products = crud.product.get_products_by_location(
+        db, location_name=location_name)
+
+    assert products.count != 0
+
+
+def test_get_products_by_type(db: Session) -> None:
+    type_name = "ORG"
+
+    create_random_product(db=db)
+    create_random_product(db=db)
+    create_random_product(db=db)
+
+    products = crud.product.get_by_type(
+        db, type=type_name)
+
+    assert products.count != 0
 
 
 def test_get_product(db: Session) -> None:
