@@ -4,6 +4,7 @@ from app import crud
 from app.schemas.product import ProductCreate, ProductUpdate
 from app.tests.utils.product import create_random_product
 from app.tests.utils.utils import random_lower_string
+from app.models.product import Product
 
 
 def test_create_product(db: Session) -> None:
@@ -62,6 +63,37 @@ def test_get_product(db: Session) -> None:
     assert product.id == stored_product.id
     assert product.type == stored_product.type
     assert product.description == stored_product.description
+
+
+def test_search_type(db: Session) -> None:
+    # Define a test query
+    query = "ORG"
+
+    results = crud.product.search(db=db, query=query)
+
+    assert isinstance(results, list)
+    assert all(isinstance(result, Product) for result in results)
+
+
+def test_search_name(db: Session) -> None:
+    # Define a test query
+    query = "Banana"
+
+    results = crud.product.search(db=db, query=query)
+
+    assert isinstance(results, list)
+    assert all(isinstance(result, Product) for result in results)
+
+
+def test_get_all_products(db: Session) -> None:
+    create_random_product(db=db)
+    create_random_product(db=db)
+    create_random_product(db=db)
+
+    results = crud.product.get_all(db=db)
+
+    assert isinstance(results, list)
+    assert all(isinstance(result, Product) for result in results)
 
 
 def test_update_product(db: Session) -> None:

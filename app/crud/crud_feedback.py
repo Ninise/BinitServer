@@ -9,7 +9,7 @@ from app.schemas.feedback import FeedbackCreate, FeedbackUpdate
 
 class CRUDFeedback(CRUDBase[Feedback, FeedbackCreate, FeedbackUpdate]):
     def get_all(self, db: Session) -> Optional[Feedback]:
-        return db.get(Feedback).all()
+        return db.query(Feedback).all()
 
     def create(self, db: Session, *, obj_in: FeedbackCreate) -> Feedback:
 

@@ -9,7 +9,7 @@ from app.schemas.location import LocationCreate, LocationUpdate
 
 class CRUDLocation(CRUDBase[Location, LocationCreate, LocationUpdate]):
     def get_by_name(self, db: Session, *, name: str) -> Optional[Location]:
-        return db.get(Location).filter(Location.name == name).all()
+        return db.query(Location).filter(Location.name == name).all()
 
     def get_all(self, db: Session) -> Optional[Location]:
         return db.get(Location).all()

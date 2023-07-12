@@ -11,7 +11,7 @@ from app.schemas.suggested import SuggestedCreate, SuggestedUpdate
 class CRUDSuggested(CRUDBase[Suggested, SuggestedCreate, SuggestedUpdate]):
 
     def get_all(self, db: Session) -> Optional[Suggested]:
-        return db.get(Suggested).all()
+        return db.query(Suggested).all()
 
     def create(self, db: Session, *, obj_in: SuggestedCreate) -> Suggested:
 

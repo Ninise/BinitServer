@@ -43,6 +43,15 @@ def test_update_feedback(db: Session) -> None:
     assert feedback_message_2 == feedback_updated.message
 
 
+def test_get_all_feedbacks(db: Session) -> None:
+    create_random_feedback(db=db)
+    create_random_feedback(db=db)
+    create_random_feedback(db=db)
+
+    feedbacks = crud.feedback.get_all(db)
+    assert len(feedbacks) != 0
+
+
 def test_delete_feedback(db: Session) -> None:
     feedback = create_random_feedback(db=db)
 

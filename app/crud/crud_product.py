@@ -12,7 +12,7 @@ from app.schemas.product import ProductCreate, ProductUpdate
 class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
     def get_all(self, db: Session) -> Optional[Product]:
-        return db.get(Product).all()
+        return db.query(Product).all()
 
     def get_by_type(self, db: Session, *, type: str) -> Optional[Product]:
         return db.query(Product).filter(Product.type == type).all()
@@ -36,28 +36,10 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
         return db.query(Product).filter(
             or_(
-                Product.NAME.ilike(search_query),
-                Product.TYPE.ilike(search_query)
+                Product.name.ilike(search_query),
+                Product.type.ilike(search_query)
             )
         ).all()
-
-    def test_search_type(db):
-        # Define a test query
-        query = "ORG"
-
-        results = db.search(db=db, query=query)
-
-        assert isinstance(results, list)
-        assert all(isinstance(result, Product) for result in results)
-
-    def test_search_name(db):
-        # Define a test query
-        query = "Banana"
-
-        results = db.search(db=db, query=query)
-
-        assert isinstance(results, list)
-        assert all(isinstance(result, Product) for result in results)
 
     def create(self, db: Session, *, obj_in: ProductCreate) -> Product:
 
