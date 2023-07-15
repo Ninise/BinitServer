@@ -10,12 +10,13 @@ from app import schemas
 
 
 def init_db(db: Session) -> None:
-
+    print("init_db")
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
     Base.metadata.create_all(bind=engine)
 
     locations = crud.location.get_all(db)
     if not locations:
+        print("not locatinos")
         location_in = schemas.LocationCreate(
             name="Toronto"
         )

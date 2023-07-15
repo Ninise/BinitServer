@@ -25,6 +25,7 @@ def init() -> None:
         # Try to create session to check if DB is awake
         db = SessionLocal()
         db.execute(text("SELECT 1"))
+
     except Exception as e:
         logger.error(e)
         raise e
