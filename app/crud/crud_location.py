@@ -12,7 +12,7 @@ class CRUDLocation(CRUDBase[Location, LocationCreate, LocationUpdate]):
         return db.query(Location).filter(Location.name == name).all()
 
     def get_all(self, db: Session) -> Optional[Location]:
-        return db.get(Location).all()
+        return db.query(Location).all()
 
     def create(self, db: Session, *, obj_in: LocationCreate) -> Location:
 

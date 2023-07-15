@@ -15,3 +15,4 @@ class Feedback(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, index=True)
     message = Column(String, index=True)
+    source = Column(String, index=True)

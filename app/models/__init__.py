@@ -3,3 +3,4 @@ from .product import Product
 from .feedback import Feedback
 from .suggested import Suggested
 from .response import Response
+from .article import Article
