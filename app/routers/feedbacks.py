@@ -26,7 +26,7 @@ def fetch_all_feedbacks(*, db: Session = Depends(deps.get_db)) -> Response:
 
 
 @router.post("/feedbacks", status_code=200)
-def add_suggested(*, db: Session = Depends(deps.get_db), feedback_in: FeedbackCreate) -> Response:
+def add_feedback(*, db: Session = Depends(deps.get_db), feedback_in: FeedbackCreate) -> Response:
     """
     Add feedback to db and send in email
     """
