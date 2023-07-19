@@ -2,7 +2,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
-import unicorn
+import uvicorn
 
 from app.routers.api import api_router
 
@@ -25,4 +25,4 @@ app.include_router(root_router)
 if __name__ == "__main__":
     # For debugging purposes only
     print("DEBUG")
-    unicorn.run(app, host="0.0.0.0", port=8000, log_level="debug")
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="debug")
