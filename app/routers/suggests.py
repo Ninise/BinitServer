@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Optional
+from fastapi.encoders import jsonable_encoder
 
 from app.schemas.suggested import SuggestedCreate
 from app.models.response import Response
@@ -21,7 +22,7 @@ def fetch_all_suggested(*, db: Session = Depends(deps.get_db)) -> Response:
 
     suggested = crud.suggested.get_all(db=db)
 
-    return Response(status=True, code=200, data=suggested)
+    return Response(status=True, code=200, data=[jsonable_encoder(pr) for pr in suggested])
 
 
 @router.post("/suggested", status_code=200)

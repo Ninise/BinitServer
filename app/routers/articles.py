@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Optional
+from fastapi.encoders import jsonable_encoder
 
 from app.models.article import Article
 from app.models.response import Response
@@ -22,7 +23,7 @@ def fetch_all_articles(*, db: Session = Depends(deps.get_db)) -> Response:
 
     articles = crud.article.get_all(db=db)
 
-    return Response(status=True, code=200, data=articles)
+    return Response(status=True, code=200, data=[jsonable_encoder(item) for item in articles])
 
 
 @router.post("/articles", status_code=200)

@@ -7,6 +7,7 @@ from pydantic import BaseModel
 class ProductBase(BaseModel):
     name: str
     type: str
+    image: str
     description: str = None
     locations: List[str]
 
@@ -21,5 +22,6 @@ class ProductCreate(ProductBase):
 class ProductUpdate(ProductBase):
     name: Optional[str] = None
     type: Optional[str] = None
+    image: Optional[str] = None
     description: Optional[str] = None
     locations: Optional[List[str]] = None

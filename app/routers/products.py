@@ -1,8 +1,10 @@
+from fastapi.encoders import jsonable_encoder
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Optional
 
 from app.schemas.product import ProductCreate, ProductUpdate
 from app.models.response import Response
+from fastapi.responses import JSONResponse
 
 from app.utils.utils import response
 
@@ -22,7 +24,7 @@ def fetch_all_products(*, db: Session = Depends(deps.get_db)) -> Response:
 
     products = crud.product.get_all(db=db)
 
-    return Response(status=True, code=200, data=products)
+    return Response(status=True, code=200, data=[jsonable_encoder(pr) for pr in products])
 
 
 @router.post("/products", status_code=200)
@@ -63,7 +65,7 @@ def search_products(*, db: Session = Depends(deps.get_db), query: str) -> Respon
 
     products = crud.product.search(db, query=query)
 
-    return Response(status=True, code=200, data=products)
+    return Response(status=True, code=200, data=[jsonable_encoder(pr) for pr in products])
 
 
 @router.delete("/products", status_code=200)

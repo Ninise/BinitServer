@@ -22,6 +22,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     type = Column(String, index=True)
+    image = Column(String)
     description = Column(String, index=True)
     locations = relationship(
         'Location',

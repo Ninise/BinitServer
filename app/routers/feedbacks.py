@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Optional
+from fastapi.encoders import jsonable_encoder
 
 from app.models.feedback import Feedback
 from app.models.response import Response
@@ -22,7 +23,7 @@ def fetch_all_feedbacks(*, db: Session = Depends(deps.get_db)) -> Response:
 
     feedbacks = crud.feedback.get_all(db=db)
 
-    return Response(status=True, code=200, data=feedbacks)
+    return Response(status=True, code=200, data=[jsonable_encoder(item) for item in feedbacks])
 
 
 @router.post("/feedbacks", status_code=200)
