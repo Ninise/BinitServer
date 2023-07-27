@@ -18,6 +18,7 @@ def test_create_product(db: Session) -> None:
 
     product = crud.product.create(db=db, obj_in=ProductCreate(
         name=name,
+        image="soon",
         locations=[location[0].name],
         description=description,
         type=type
