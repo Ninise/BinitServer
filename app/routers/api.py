@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.routers import locations, feedbacks, suggests, products, articles
+from app.routers import locations, feedbacks, suggests, products, articles, quick_search
 
 api_router = APIRouter()
 
@@ -18,3 +18,6 @@ api_router.include_router(
 
 api_router.include_router(
     articles.router, tags=["articles"])
+
+api_router.include_router(
+    quick_search.router, tags=["quick_search"])

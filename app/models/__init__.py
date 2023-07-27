@@ -4,3 +4,4 @@ from .feedback import Feedback
 from .suggested import Suggested
 from .response import Response
 from .article import Article
+from .quick_search import QuickSearch
