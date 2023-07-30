@@ -1,13 +1,15 @@
 from pathlib import Path
 
 from fastapi import FastAPI, APIRouter, Request, Depends
-from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+
 import uvicorn
 
 from app.routers.api import api_router
 
 root_router = APIRouter()
 app = FastAPI(title="Binit API")
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 
 @root_router.get("/", status_code=200)

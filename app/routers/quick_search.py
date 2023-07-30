@@ -33,7 +33,6 @@ def add_quick_search(*, db: Session = Depends(deps.get_db), quick_search_in: Qui
     """
 
     quick_search = crud.quick_search.create(db, obj_in=quick_search_in)
-    # send email to us
 
     return Response(status=True, code=200, data=jsonable_encoder(quick_search))
 
