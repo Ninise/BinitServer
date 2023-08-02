@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
-from typing import Any, Optional
+from typing import Any, Optional, Dict
 from fastapi.encoders import jsonable_encoder
 
 from app.models.article import Article
@@ -31,11 +31,10 @@ def add_article(*, db: Session = Depends(deps.get_db), article_in: ArticleCreate
     """
     Add article to db and send in email
     """
-
     article = crud.article.create(db, obj_in=article_in)
     # send email to us
 
-    return Response(status=True, code=200, data=article)
+    return Response(status=True, code=200, data=jsonable_encoder(article))
 
 
 @router.delete("/articles", status_code=200)
