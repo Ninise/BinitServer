@@ -4,3 +4,4 @@ from .crud_product import product
 from .crud_suggested import suggested
 from .crud_article import article
 from .crud_quick_search import quick_search
+from .crud_garbage_category import garbage_category
