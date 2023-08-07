@@ -26,16 +26,16 @@ class CRUDGarbageCategory(CRUDBase[GarbageCategory, GarbageCategoryCreate, Garba
             footer=obj_in.footer
         )
 
-        GarbageCategory = db.query(GarbageCategory).filter(
+        garbage_category = db.query(GarbageCategory).filter(
             GarbageCategory.title == obj_in.title).first()
 
-        if GarbageCategory is None:
+        if garbage_category is None:
             db.add(db_obj)
             db.commit()
             db.refresh(db_obj)
             return db_obj
         else:
-            return GarbageCategory
+            return garbage_category
 
     def update(
         self, db: Session, *, db_obj: GarbageCategory, obj_in: Union[GarbageCategoryUpdate, Dict[str, Any]]
