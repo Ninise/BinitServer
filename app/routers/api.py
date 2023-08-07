@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.routers import locations, feedbacks, suggests, products, articles, quick_search
+from app.routers import locations, feedbacks, suggests, products, articles, quick_search, garbage_category
 
 api_router = APIRouter()
 
@@ -21,3 +21,6 @@ api_router.include_router(
 
 api_router.include_router(
     quick_search.router, tags=["quick_search"])
+
+api_router.include_router(
+    garbage_category.router, tags=["garbage_category"])
