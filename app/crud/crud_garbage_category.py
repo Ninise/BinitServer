@@ -23,7 +23,8 @@ class CRUDGarbageCategory(CRUDBase[GarbageCategory, GarbageCategoryCreate, Garba
             description=obj_in.description,
             items=obj_in.items,
             type=obj_in.type,
-            footer=obj_in.footer
+            footer=obj_in.footer,
+            display_type=obj_in.display_type
         )
 
         garbage_category = db.query(GarbageCategory).filter(

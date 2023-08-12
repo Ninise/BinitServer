@@ -31,7 +31,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
         return products
 
-    def search(self, db: Session, query: str):
+    def search(self, db: Session, query: str, limit: int, offset: int):
         search_query = f"%{query}%"
 
         return db.query(Product).filter(
@@ -39,7 +39,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
                 Product.name.ilike(search_query),
                 Product.type.ilike(search_query)
             )
-        ).all()
+        ).limit(limit).offset(offset).all()
 
     def create(self, db: Session, *, obj_in: ProductCreate) -> Product:
 

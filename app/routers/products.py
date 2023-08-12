@@ -58,12 +58,12 @@ def update_product(*, db: Session = Depends(deps.get_db), id: str, product_in: P
 
 
 @router.get("/products", status_code=200)
-def search_products(*, db: Session = Depends(deps.get_db), query: str) -> Response:
+def search_products(*, db: Session = Depends(deps.get_db), query: str, limit: int, offset: int) -> Response:
     """
     search all products
     """
 
-    products = crud.product.search(db, query=query)
+    products = crud.product.search(db, query=query, limit=limit, offset=offset)
 
     return Response(status=True, code=200, data=[jsonable_encoder(pr) for pr in products])
 
