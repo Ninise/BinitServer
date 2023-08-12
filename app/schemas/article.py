@@ -29,10 +29,10 @@ class ArticleBase:
     image_author: str
     description: str
     source: str
-    items: Optional[List[Dict[str, Any]]] = None
     short_description: str
-    footer: Optional[str] = None
     type: str
+    items: Optional[List[Dict[str, Any]]] = None
+    footer: Optional[str] = None
 
 
 # Properties to receive on item creation
