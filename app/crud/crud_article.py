@@ -22,7 +22,10 @@ class CRUDArticle(CRUDBase[Article, ArticleCreate, ArticleUpdate]):
             image_author=obj_in.image_author,
             description=obj_in.description,
             items=obj_in.items,
-            source=obj_in.source
+            source=obj_in.source,
+            short_description=obj_in.short_description,
+            footer=obj_in.footer,
+            type=obj_in.type
         )
 
         article = db.query(Article).filter(
