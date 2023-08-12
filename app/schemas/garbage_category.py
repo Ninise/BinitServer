@@ -28,6 +28,7 @@ class GarbageCategoryBase:
     image: str
     image_author: str
     description: str
+    display_type: str
     type: str
     footer: Optional[str] = None
     items: Optional[List[Dict[str, Any]]] = None
@@ -44,6 +45,7 @@ class GarbageCategoryUpdate(BaseModel):
     image: Optional[str] = None
     image_author: Optional[str] = None
     description: Optional[str] = None
+    display_type: Optional[str] = None
     type: Optional[str] = None
     footer: Optional[str] = None
     items: Optional[List[Dict[str, Any]]] = None
