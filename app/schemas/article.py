@@ -30,6 +30,9 @@ class ArticleBase:
     description: str
     source: str
     items: Optional[List[Dict[str, Any]]] = None
+    short_description: str
+    footer: Optional[str] = None
+    type: str
 
 
 # Properties to receive on item creation
@@ -45,3 +48,6 @@ class ArticleUpdate(BaseModel):
     description: Optional[str] = None
     source: Optional[str] = None
     items: Optional[List[Dict[str, Any]]] = None
+    short_description: Optional[str] = None
+    footer: Optional[str] = None
+    type: Optional[str] = None

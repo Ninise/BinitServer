@@ -19,3 +19,6 @@ class Article(Base):
     description = Column(String)
     items = Column(JSONB)
     source = Column(String)
+    short_description = Column(String)
+    footer = Column(String)
+    type = Column(String)
