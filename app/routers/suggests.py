@@ -33,7 +33,7 @@ def add_suggested(*, db: Session = Depends(deps.get_db), suggested_in: Suggested
 
     suggested = crud.suggested.create(db=db, obj_in=suggested_in)
 
-    return Response(status=True, code=200, data=suggested)
+    return Response(status=True, code=200, data=jsonable_encoder(suggested))
 
 
 @router.delete("/suggested", status_code=200)
