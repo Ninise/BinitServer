@@ -70,7 +70,7 @@ def test_search_type(db: Session) -> None:
     # Define a test query
     query = "ORG"
 
-    results = crud.product.search(db=db, query=query)
+    results = crud.product.search(db=db, query=query, limit=10, offset=0)
 
     assert isinstance(results, list)
     assert all(isinstance(result, Product) for result in results)
@@ -80,7 +80,7 @@ def test_search_name(db: Session) -> None:
     # Define a test query
     query = "Banana"
 
-    results = crud.product.search(db=db, query=query)
+    results = crud.product.search(db=db, query=query, limit=10, offset=0)
 
     assert isinstance(results, list)
     assert all(isinstance(result, Product) for result in results)

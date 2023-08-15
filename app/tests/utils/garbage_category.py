@@ -24,6 +24,7 @@ def create_random_garbage_category(db: Session) -> models.GarbageCategory:
                 'data': ["terrible", "aww", "poor"]
             }
         ],
+        display_type="Recycle",
         type="RECYCLE",
         footer="Cool footer"
     )
@@ -46,6 +47,7 @@ def random_garbage_category_model() -> GarbageCategoryCreate:
                 'data': ["terrible", "aww", "poor"]
             }
         ],
+        display_type="Recycle",
         type="RECYCLE",
         footer="Lower stuff"
     )

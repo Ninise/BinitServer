@@ -15,6 +15,9 @@ def test_create_article(db: Session) -> None:
     image_author = article_in.image_author
     items = article_in.items
     source = article_in.source
+    footer = article_in.footer
+    type = article_in.type
+    short_desc = article_in.short_description
 
     article = crud.article.create(db=db, obj_in=article_in)
 

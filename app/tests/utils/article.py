@@ -24,17 +24,20 @@ def create_random_article(db: Session) -> models.Article:
                 'data': ["terrible", "aww", "poor"]
             }
         ],
-        source="RECYCLE"
+        type="Recycle",
+        short_description="Short desc",
+        footer="footer",
+        source="Main"
     )
     return crud.article.create(db=db, obj_in=article_in)
 
 
 def random_article_model() -> ArticleCreate:
     return ArticleCreate(
-        title="Great things do to without you",
+        title="Great things do to without you 1",
         image="https://binit.cool/",
         image_author="MyCoolPic",
-        description=random_lower_string(),
+        description="random_lower_string",
         items=[
             {
               'title': 'Leaving without plastic',
@@ -45,5 +48,9 @@ def random_article_model() -> ArticleCreate:
                 'data': ["terrible", "aww", "poor"]
             }
         ],
-        source="RECYCLE"
+        type="Recycle",
+        short_description="Short desc",
+        footer="footer",
+        source="Main"
+
     )
