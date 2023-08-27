@@ -6,3 +6,4 @@ from .response import Response
 from .article import Article
 from .quick_search import QuickSearch
 from .garbage_category import GarbageCategory
+from .quiz_question import QuizQuestion
