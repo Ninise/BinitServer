@@ -34,8 +34,8 @@ async def fetch_image_from_external_source(product):
                 data = await response.json()
                 photos = data.get("photos", [])
                 if len(photos) > 0:
-                    print(photos[0]["src"]["original"])
-                    return photos[0]["src"]["original"]
+                    print(photos[0]["src"]["medium"])
+                    return photos[0]["src"]["medium"]
                 else:
                     print("No photo found")
                     return ""
@@ -45,17 +45,17 @@ async def fetch_image_from_external_source(product):
 
 
 async def process_product(product):
-    print("process_product 1")
-    if not product.image:
-        print("no image found ${product.name} " + product.name)
-        image_path = await fetch_image_from_external_source(product)
-        if image_path:
-            print('image to update ' + product.name)
-            # Update the product in the database
-            product_updated = crud.product.update(
-                db=db, db_obj=product, obj_in=ProductUpdate(image=image_path))
-            print('product updated ' + product_updated.name +
-                  ' - ' + product_updated.image)
+    # print("process_product 1")
+    # if not product.image:
+    print("no image found ${product.name} " + product.name)
+    image_path = await fetch_image_from_external_source(product)
+    if image_path:
+        print('image to update ' + product.name)
+        # Update the product in the database
+        product_updated = crud.product.update(
+            db=db, db_obj=product, obj_in=ProductUpdate(image=image_path))
+        print('product updated ' + product_updated.name +
+              ' - ' + product_updated.image)
 
 
 async def main():
