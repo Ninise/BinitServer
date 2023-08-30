@@ -13,6 +13,7 @@ def test_create_garbage_category(db: Session) -> None:
     image = garbage_category_in.image
     description = garbage_category_in.description
     image_author = garbage_category_in.image_author
+    image_author_url = garbage_category_in.image_author_url
     items = garbage_category_in.items
     type = garbage_category_in.type
     footer = garbage_category_in.footer

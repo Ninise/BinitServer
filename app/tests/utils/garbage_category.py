@@ -13,6 +13,7 @@ def create_random_garbage_category(db: Session) -> models.GarbageCategory:
         title="Great things do to without you",
         image="https://binit.cool/",
         image_author="MyCoolPic",
+        image_author_url="MyCooYRK",
         description=random_lower_string(),
         items=[
             {
@@ -36,6 +37,7 @@ def random_garbage_category_model() -> GarbageCategoryCreate:
         title="Great things do to without you",
         image="https://binit.cool/",
         image_author="MyCoolPic",
+        image_author_url="MyCooYRK",
         description=random_lower_string(),
         items=[
             {

@@ -16,6 +16,7 @@ class GarbageCategory(Base):
     title = Column(String, index=True)
     image = Column(String)
     image_author = Column(String)
+    image_author_url = Column(String)
     description = Column(String)
     display_type = Column(String)
     items = Column(JSONB)

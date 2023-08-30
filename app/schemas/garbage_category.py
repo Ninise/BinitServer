@@ -27,6 +27,7 @@ class GarbageCategoryBase:
     title: str
     image: str
     image_author: str
+    image_author_url: str
     description: str
     display_type: str
     type: str
@@ -44,6 +45,7 @@ class GarbageCategoryUpdate(BaseModel):
     title: Optional[str] = None
     image: Optional[str] = None
     image_author: Optional[str] = None
+    image_author_url: Optional[str] = None
     description: Optional[str] = None
     display_type: Optional[str] = None
     type: Optional[str] = None

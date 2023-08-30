@@ -20,6 +20,7 @@ class CRUDGarbageCategory(CRUDBase[GarbageCategory, GarbageCategoryCreate, Garba
             title=obj_in.title,
             image=obj_in.image,
             image_author=obj_in.image_author,
+            image_author_url=obj_in.image_author_url,
             description=obj_in.description,
             items=obj_in.items,
             type=obj_in.type,
