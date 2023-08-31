@@ -82,6 +82,7 @@ def test_search_name(db: Session) -> None:
 
     results = crud.product.search(db=db, query=query, limit=10, offset=0)
     print(results)
+    assert results[0].name == "axe deo"
     assert len(results) == 2
     assert isinstance(results, list)
     assert all(isinstance(result, Product) for result in results)
