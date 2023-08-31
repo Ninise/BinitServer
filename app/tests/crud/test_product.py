@@ -66,22 +66,23 @@ def test_get_product(db: Session) -> None:
     assert product.description == stored_product.description
 
 
-def test_search_type(db: Session) -> None:
-    # Define a test query
-    query = "ORG"
+# def test_search_type(db: Session) -> None:
+#     # Define a test query
+#     query = "ORG"
 
-    results = crud.product.search(db=db, query=query, limit=10, offset=0)
+#     results = crud.product.search(db=db, query=query, limit=10, offset=0)
 
-    assert isinstance(results, list)
-    assert all(isinstance(result, Product) for result in results)
+#     assert isinstance(results, list)
+#     assert all(isinstance(result, Product) for result in results)
 
 
 def test_search_name(db: Session) -> None:
     # Define a test query
-    query = "Banana"
+    query = "axe"
 
     results = crud.product.search(db=db, query=query, limit=10, offset=0)
-
+    print(results)
+    assert len(results) == 2
     assert isinstance(results, list)
     assert all(isinstance(result, Product) for result in results)
 

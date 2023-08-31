@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional, Union
 
 from sqlalchemy.orm import Session
-from sqlalchemy import or_
+from sqlalchemy import or_, func
 
 from app.crud.base import CRUDBase
 from app.models.product import Product
@@ -34,12 +34,19 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def search(self, db: Session, query: str, limit: int, offset: int):
         search_query = f"%{query}%"
 
-        return db.query(Product).filter(
+        result = db.query(Product).filter(
             or_(
                 Product.name.ilike(search_query),
                 Product.type.ilike(search_query)
             )
         ).limit(limit).offset(offset).all()
+
+        filtered_products = [
+            product for product in result
+            if any(word.lower().startswith(query.lower()) for word in product.name.split(' '))
+        ]
+
+        return filtered_products
 
     def create(self, db: Session, *, obj_in: ProductCreate) -> Product:
 
