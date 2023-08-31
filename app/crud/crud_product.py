@@ -46,7 +46,13 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
             if any(word.lower().startswith(query.lower()) for word in product.name.split(' '))
         ]
 
-        return filtered_products
+        sorted_products = sorted(
+            filtered_products,
+            key=lambda product: not any(word.lower().startswith(
+                query.lower()) for word in product.name.split(' '))
+        )
+
+        return sorted_products
 
     def create(self, db: Session, *, obj_in: ProductCreate) -> Product:
 
