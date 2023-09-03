@@ -41,16 +41,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
                 search_query)).limit(limit).offset(offset).all()
             return result
 
-        # result = db.query(Product).filter(
-        #     or_(
-        #         Product.name.ilike(search_query),
-        #         Product.type.ilike(search_query)
-        #     )
-        # ).limit(limit).offset(offset).all()
-
         result = db.query(Product).all()
-
-        # if you type just 'h' it finds 3 elements, 'he' finds 4...
 
         filtered_products = [
             product for product in result
@@ -65,7 +56,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
         sorted_products = sorted(filtered_products, key=custom_sort_key)
 
-        return sorted_products
+        return sorted_products[offset:offset + limit]
 
     def create(self, db: Session, *, obj_in: ProductCreate) -> Product:
 
