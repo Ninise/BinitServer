@@ -34,12 +34,16 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def search(self, db: Session, query: str, limit: int, offset: int):
         search_query = f"%{query}%"
 
-        result = db.query(Product).filter(
-            or_(
-                Product.name.ilike(search_query),
-                Product.type.ilike(search_query)
-            )
-        ).limit(limit).offset(offset).all()
+        # result = db.query(Product).filter(
+        #     or_(
+        #         Product.name.ilike(search_query),
+        #         Product.type.ilike(search_query)
+        #     )
+        # ).limit(limit).offset(offset).all()
+
+        result = db.query(Product).all()
+
+        # if you type just 'h' it finds 3 elements, 'he' finds 4...
 
         filtered_products = [
             product for product in result
