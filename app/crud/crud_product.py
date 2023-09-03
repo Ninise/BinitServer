@@ -8,6 +8,8 @@ from app.models.product import Product
 from app.models.location import Location
 from app.schemas.product import ProductCreate, ProductUpdate
 
+from app.utils.utils import is_garbage_type
+
 
 class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
@@ -33,6 +35,11 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
 
     def search(self, db: Session, query: str, limit: int, offset: int):
         search_query = f"%{query}%"
+
+        if (is_garbage_type):
+            result = db.query(Product).filter(Product.type.ilike(
+                search_query)).limit(limit).offset(offset).all()
+            return result
 
         # result = db.query(Product).filter(
         #     or_(
