@@ -36,11 +36,19 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def search(self, db: Session, query: str, limit: int, offset: int):
         search_query = f"%{query}%"
 
+        # check if it's search by type
         if (is_garbage_type):
             result = db.query(Product).filter(Product.type.ilike(
                 search_query)).limit(limit).offset(offset).all()
             return result
 
+        # check if a search query more than 1 word
+        if query.split(' ').count > 1:
+            result = db.query(Product).filter(
+                Product.name.ilike(search_query)).all()
+            return result
+
+        # in all other cases do a regular search
         result = db.query(Product).all()
 
         filtered_products = [
