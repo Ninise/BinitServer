@@ -6,7 +6,7 @@ def response(status, code, data, error=None) -> Response:
 
 
 def is_garbage_type(type: str) -> bool:
-    types = ['Yard Waste', 'HHW', 'Electronic Waste',
-             'Garbage', 'Organic', 'Recycle']
+    types = ['yard waste', 'hhw', 'electronic waste',
+             'garbage', 'organic', 'recycle']
 
     return type in types

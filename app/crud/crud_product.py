@@ -7,6 +7,8 @@ from app.crud.base import CRUDBase
 from app.models.product import Product
 from app.models.location import Location
 from app.schemas.product import ProductCreate, ProductUpdate
+from sqlalchemy.sql import func
+
 
 from app.utils.utils import is_garbage_type
 
@@ -36,10 +38,12 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
     def search(self, db: Session, query: str, limit: int, offset: int):
         search_query = f"%{query}%"
 
+        print(f'${search_query} query')
         # check if it's search by type
-        if (is_garbage_type(type=query.capitalize())):
-            result = db.query(Product).filter(Product.type.ilike(
-                query)).limit(limit).offset(offset).all()
+        if (is_garbage_type(type=query.lower())):
+            print(f'${query.lower()} is garbage type')
+            result = db.query(Product).filter(func.lower(Product.type).ilike(
+                search_query)).limit(limit).offset(offset).all()
             return result
 
         # check if a search query more than 1 word
