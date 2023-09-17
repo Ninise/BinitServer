@@ -63,8 +63,6 @@ def search_products(*, db: Session = Depends(deps.get_db), query: str, limit: in
     search all products
     """
 
-    print("do search")
-
     products = crud.product.search(db, query=query, limit=limit, offset=offset)
 
     return Response(status=True, code=200, data=[jsonable_encoder(pr) for pr in products])
