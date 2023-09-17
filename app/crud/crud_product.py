@@ -39,7 +39,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
         # check if it's search by type
         if (is_garbage_type(type=query.capitalize())):
             result = db.query(Product).filter(Product.type.ilike(
-                search_query)).limit(limit).offset(offset).all()
+                query)).limit(limit).offset(offset).all()
             return result
 
         # check if a search query more than 1 word
