@@ -37,7 +37,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
         search_query = f"%{query}%"
 
         # check if it's search by type
-        if (is_garbage_type):
+        if (is_garbage_type(type=query)):
             print("is_garbage_type")
             result = db.query(Product).filter(Product.type.ilike(
                 search_query)).limit(limit).offset(offset).all()
