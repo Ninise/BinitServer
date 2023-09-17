@@ -44,7 +44,7 @@ class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
             return result
 
         # check if a search query more than 1 word
-        if query.split(' ').count > 1:
+        if len(query.split(' ')) > 1:
             print("if query.split(' ').count > 1:")
             result = db.query(Product).filter(
                 Product.name.ilike(search_query)).all()
